@@ -27,7 +27,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "https": "^1.0.0",
-    "mongoose": "^5.2.8",
+    "mongoose": "^5.7.5",
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-sequence": "^4.0.1",
     "nodemon": "^1.18.3",
