@@ -1,0 +1,125 @@
+{
+  "fileIdentifier": "r_piemon:da9b12ba-866a-4f0f-8704-5b7b753e4f15",
+  "language": "ita",
+  "characterSet": "utf8",
+  "hierarchyLevel": "dataset",
+  "contact": {
+    "organisationName": "CSI Piemonte",
+    "contactInfo": {
+      "address": {
+        "electronicMailAddress": "info-geoportale@regione.piemonte.it"
+      },
+      "onlineResource": {
+        "linkage": "http://www.csipiemonte.it",
+        "protocol": "WWW:LINK-1.0-http--link",
+        "name": "Sito web"
+      }
+    },
+    "role": "pointOfContact"
+  },
+  "dateStamp": "2018-03-23T00:00:00.000Z",
+  "metadataStandardName": "DM - Regole tecniche RNDT",
+  "metadataStandardVersion": "10 novembre 2011",
+  "identificationInfo": {
+    "citation": {
+      "title": "BDTRE 2018 - Database GeoTopografico (dataset vettoriale)",
+      "date": [{ "date": "2018-01-31T00:00:00.000Z", "dateType": "revision" }],
+      "identifier": "r_piemon:da9b12ba-866a-4f0f-8704-5b7b753e4f15_resource"
+    },
+    "abstract": "Si tratta della versione annuale della Banca Dati Territoriale di Riferimento contenente i dati aggiornati al 31/01/2018.\r\nI dati sono distribuiti con taglio su base comunale.",
+    "pointOfContact": [
+      {
+        "organisationName": "Regione Piemonte - A1613A - Sistema informativo territoriale e ambientale",
+        "contactInfo": {
+          "address": {
+            "electronicMailAddress": "cartografico@regione.piemonte.it"
+          },
+          "onlineResource": {
+            "linkage": "http://www.regione.piemonte.it/sit/",
+            "protocol": "WWW:LINK-1.0-http--link",
+            "name": "Sito web"
+          }
+        },
+        "role": "pointOfContact"
+      }
+    ],
+    "resourceMaintenance": { "maintenanceAndUpdateFrequency": "asNeeded" },
+    "graphicOverview": [
+      { "fileDescription": "thumbnail" },
+      { "fileDescription": "large_thumbnail" }
+    ],
+    "descriptiveKeywords": [
+      {
+        "keyword": ["Utilizzo del territorio"],
+        "thesaurusName": {
+          "title": "GEMET - INSPIRE themes, version 1.0",
+          "date": [
+            { "date": "2008-06-01T00:00:00.000Z", "dateType": "publication" }
+          ]
+        }
+      },
+      { "keyword": ["db topografico", "BDTRE"] },
+      {
+        "keyword": ["cartografia"],
+        "thesaurusName": {
+          "title": "GEMET - Concepts, version 2.4",
+          "date": [
+            { "date": "2010-01-13T00:00:00.000Z", "dateType": "publication" }
+          ]
+        }
+      },
+      { "keyword": ["opendata"] },
+      { "keyword": ["RNDT"] }
+    ],
+    "resourceConstraints": [
+      {
+        "accessConstraints": ["otherRestrictions"],
+        "useConstraints": ["otherRestrictions"],
+        "otherConstraints": ["Dato pubblico"]
+      }
+    ],
+    "spatialRepresentationType": "vector",
+    "spatialResolution": { "equivalentScale": { "denominator": 5000 } },
+    "language": "ita",
+    "characterSet": "utf8",
+    "topicCategory": "imageryBaseMapsEarthCover",
+    "extent": [
+      {
+        "geographicElement": {
+          "westBoundLongitude": 6.62,
+          "eastBoundLongitude": 9.21,
+          "southBoundLatitude": 44.06,
+          "northBoundLatitude": 46.46
+        }
+      }
+    ]
+  },
+  "distributionInfo": {
+    "distributionFormat": [{ "name": "ESRI Shapefile", "version": "1.0" }],
+    "transferOptions": [
+      {
+        "onLine": [
+          {
+            "linkage": "Scarico",
+            "protocol": "WWW:DOWNLOAD-1.0-http--custom",
+            "description": "Scarico BDTRE - Database GeoTopografico - 2018"
+          }
+        ]
+      },
+      {
+        "onLine": [
+          {
+            "linkage": "http://www.geoportale.piemonte.it/cms/bdtre/31-modalita-di-fruizione-della-bdtre-3",
+            "protocol": "WWW:LINK-1.0-http--link"
+          }
+        ]
+      }
+    ]
+  },
+  "dataQualityInfo": {
+    "scope": { "level": "dataset" },
+    "lineage": {
+      "statement": "Alimentata dalla produzione dei DB Topografici locali, finanziati da appositi bandi erogati dalla Fondazione CRT (2006, 2010). Il territorio al contorno delle aree derivate dalle produzioni dei DB Topografici è stato popolato, per i soli strati\r\nprioritari, con i dati più recenti ed aggiornati disponibili."
+    }
+  }
+}

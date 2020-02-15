@@ -1,0 +1,63 @@
+<mat-card class="barraviola distanza mat-elevation-z6">
+  <mat-card-subtitle class="barrabacktext">
+    <b>Query results</b>
+  </mat-card-subtitle>
+</mat-card>
+
+<mat-card class="titolo mat-elevation-z6" [hidden]="hideResult"   >
+  <mat-card-content class="barrabacktext" >
+
+     
+              Found : {{size}} documents
+      
+            </mat-card-content>
+</mat-card>
+
+<mat-card class="barraback mat-elevation-z6" [hidden]="hideResult"   >
+  
+    <mat-card-content class="barrabacktext sopra" (click)="backHome()">
+       <i class="material-icons"> undo </i> Back 
+    </mat-card-content>
+</mat-card>
+
+
+<!-- <mat-card class=" colorfound" [hidden]="hideResult"  >
+  <mat-card-title     (click)="backHome()"  >
+  
+  </mat-card-title>
+</mat-card> -->
+
+<mat-spinner *ngIf="!hideResult"></mat-spinner>
+
+<mat-card *ngFor="let metadato of risposta.valore" class="example-card mat-elevation-z6" [hidden]="hideResult"
+  (click)="gotoView(metadato)">
+  <mat-card-header>
+    <!-- <mat-icon>more_vert</mat-icon> -->
+    <div mat-card-avatar class="example-header-image"></div>
+    <!-- <img mat-card-avatar *ngIf="checkIfThereIsImage(metadato)" src="{{metadato.rndt.identificationInfo.graphicOverview[0].fileName}}"  > -->
+    <mat-card-title>{{ metadato._source.identificationInfo.citation.title }}</mat-card-title>
+    <mat-card-subtitle>{{ metadato._source.dateStamp }}</mat-card-subtitle>
+  </mat-card-header>
+  <!-- <img mat-card-image  *ngIf="checkIfThereIsImage(metadato)" src="{{metadato.rndt.identificationInfo.graphicOverview[0].fileName}}"  > -->
+  <mat-card-content>
+    <div class="text2 ellipsis" *ngIf="checkIfThereIsImage(metadato)">
+      <p class="text2-concat">
+        <img style="float: left; margin: 0px 15px 15px 0px;"
+          src="{{metadato._source.identificationInfo.graphicOverview[0].fileName}}"
+          width="100" />{{ metadato._source.identificationInfo.abstract }}<br style="clear: both;" />
+      </p>
+    </div>
+    <div class="text ellipsis" *ngIf="!checkIfThereIsImage(metadato)">
+      <p class="text-concat">{{ metadato._source.identificationInfo.abstract }}</p>
+    </div>
+    <p>Score : {{metadato._score}}</p>
+  </mat-card-content>
+  <!-- <mat-card-footer>
+    
+  </mat-card-footer> -->
+</mat-card>
+<mat-card class="barraback mat-elevation-z6" [hidden]="hideResult">
+  <mat-card-title class="barrabacktext" (click)="backHome()">
+    <i class="material-icons"> undo </i> Back
+  </mat-card-title>
+</mat-card>

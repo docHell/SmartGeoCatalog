@@ -1,0 +1,312 @@
+<mat-card class="barraviola distanzatitolo mat-elevation-z6">
+  <mat-card-subtitle class="barrabacktext">
+    <b>UGBD Geocatalog Queries</b>
+  </mat-card-subtitle>
+</mat-card>
+<mat-card class="titolo distanzatitolo mat-elevation-z6">
+  <mat-card-subtitle class="barrabacktext">
+    <b>Free Text Search</b>
+  </mat-card-subtitle>
+</mat-card>
+<mat-card class="distanzatitolo corpo_search mat-elevation-z6">
+  <!-- <mat-card-subtitle class="bold_text"> Free Text Search : </mat-card-subtitle> -->
+  <mat-card-content>
+    <div class="row_singolo">
+      <div class="column_90">
+        <mat-form-field class="query_input distanza ">
+          <input
+            matInput
+            class="corpo2"
+            name="key"
+            id="key"
+            placeholder="Please enter your query..."
+            [(ngModel)]="query.key"
+          />
+        </mat-form-field>
+      </div>
+      <div class="column_10">
+        <button
+          mat-raised-button
+          [color]="'success'"
+          class="bottoneconferma"
+          (click)="navigateTest()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<div class="row">
+  <div class="column">
+    <mat-card class="distanza corpo mat-elevation-z6">
+      <mat-card-subtitle class="bold_text">
+        <div class="row">
+          <div class="column_65">Who :</div>
+          <div class="column_35">
+            <!-- <button
+              mat-mini-fab
+              [color]="'success'"
+              class="distanza"
+              (click)="adv_who()"
+            >
+              Adv
+            </button> -->
+          </div>
+        </div>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <mat-form-field class="query_input distanza">
+             
+          <input matInput class="corpowho"  [(ngModel)]="query.who"  [formControl]="myControl" [matAutocomplete]="auto" />
+          <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of contacts" [value]="option.mail">
+                {{option.mail}} \1{{option.organization}}
+              </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+  <div class="column">
+    <mat-card class="distanza corpo mat-elevation-z6">
+      <mat-card-subtitle class="bold_text">
+        <div class="row">
+          <div class="column_65">When :</div>
+          <div class="column_35">
+            <button mat-mini-fab [color]="'success'" class="distanza">
+              Adv
+            </button>
+          </div>
+        </div>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <mat-form-field class="query_input distanza">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            class="corpo2date"
+            placeholder="Choose a date"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="column">
+    <mat-card class="distanza corpo mat-elevation-z6">
+      <mat-card-subtitle class="bold_text">
+        <div class="row">
+          <div class="column_65">Where :</div>
+
+          <div class="column_35" [hidden]="map_data_present">
+            <button
+              mat-mini-fab
+              [color]="'success'"
+              class="distanza"
+              (click)="adv_map()"
+            >
+              Adv
+            </button>
+          </div>
+          <div class="column_35" [hidden]="!map_data_present">
+            <button
+              mat-mini-fab
+              [color]="'subsuccess'"
+              class="distanza"
+              (click)="remove_bound()"
+            >
+              Rem
+            </button>
+          </div>
+        </div>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <div [hidden]="map_data_present">
+
+            <div class="row_singolo">
+                <div class="column_75">
+                    <mat-form-field class="query_input distanza">
+                      <input matInput class="corpo2" 
+                      name="city_name"
+                      id="city_name"
+                      [(ngModel)]="city_name"/>
+                    </mat-form-field>
+                </div>
+                <div class="column_20_where">
+                    <button
+                      mat-raised-button
+                      [color]="'success'"
+                      class="bottoneconferma"
+                      (click)="searchBBOX()"
+                    >
+                      Validate
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div
+          [hidden]="!map_data_present"
+          class="mini_mappa"
+          id="leaflet_mini"
+        ></div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="column">
+    <mat-card class="distanzatitolo corpo mat-elevation-z6">
+      <mat-card-subtitle class="bold_text">
+        <div class="row">
+          <div class="column_65">Quality :</div>
+          <div class="column_35" [hidden]="quality_data_present">
+            <button
+              mat-mini-fab
+              [color]="'success'"
+              class="distanza"
+              (click)="adv_quality()"
+            >
+              Adv
+            </button>
+          </div>
+          <div class="column_35" [hidden]="!quality_data_present">
+            <button
+              mat-mini-fab
+              [color]="'subsuccess'"
+              class="distanza"
+              (click)="remove_quality()"
+            >
+              Rem
+            </button>
+          </div>
+        </div>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <div [hidden]="!quality_data_present" class="mini_quality">
+          <div class="row">
+            <div class="column_50">
+                <mat-card class="distanza corpo_searched">
+                    <mat-card-subtitle>Accuracy</mat-card-subtitle>
+                    <mat-card-content>{{ query.accuracy }}</mat-card-content>
+                  </mat-card>
+            </div>
+            <div class="column_50">
+                <mat-card class="distanza corpo_searched">
+                    <mat-card-subtitle>Range</mat-card-subtitle>
+                    <mat-card-content>{{ query.range }}</mat-card-content>
+                  </mat-card>
+            </div>
+          </div>
+          <mat-card class="distanza corpo_searched">
+            <mat-card-subtitle>Lineage</mat-card-subtitle>
+            <mat-card-content>{{ query.lineage }}</mat-card-content>
+          </mat-card>
+        </div>
+        <div [hidden]="quality_data_present">
+          <mat-form-field class="query_input distanza">
+            <input matInput class="corpo2" [(ngModel)]="query.lineage" />
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div [hidden]="map_view">
+  <mat-card class="distanza subtitolo mat-elevation-z6">
+    <div class="row">
+      <div class="column_80">
+        <mat-card-title>Select an area using the top right menu</mat-card-title>
+      </div>
+      <div class="column_20">
+        <button
+          mat-raised-button
+          [color]="'subsuccess'"
+          class="distanza"
+          (click)="save_bound()"
+        >
+          Save Bounds!
+        </button>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="distanza mat-elevation-z6">
+    <div [hidden]="map_view" class="mappa" id="leaflet"></div>
+  </mat-card>
+</div>
+
+<div [hidden]="who_view">
+  <mat-card class="distanza titolo">
+    <mat-card-title>Who</mat-card-title>
+  </mat-card>
+</div>
+
+<div [hidden]="quality_view">
+  <mat-card class="distanza subtitolo mat-elevation-z6">
+    <div class="row">
+      <div class="column_80">
+        <mat-card-title>Qualità</mat-card-title>
+      </div>
+      <div class="column_20">
+        <button
+          mat-raised-button
+          [color]="'subsuccess'"
+          class="distanza"
+          (click)="save_quality()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="distanza mat-elevation-z6">
+    <mat-card-content>
+     
+        <div class="row">
+          <div class="column_80">
+              <mat-form-field class="query_input distanza unit_of_m">
+            <input   
+              matInput
+              numeric numericType="number"
+              placeholder="Positional Accuracy ( meter )"
+              [(ngModel)]="query.accuracy"
+            />
+            </mat-form-field>
+          </div>
+          <div class="column_20">
+
+            
+              <mat-form-field class="query_input distanza unit_of_m">
+                  <input   
+                  matInput
+                  numeric numericType="number"
+                  placeholder="Range ( meter )"
+                  [(ngModel)]="query.range"
+                />
+            <!-- <select matNativeControl placeholder="Unit of measure" required  [(ngModel)]="query.untit" >
+              <option value="m">m</option>
+              <option value="km">km</option>
+              <option value="mm">mm</option>
+              <option value="feet">feet</option>
+            </select> -->
+            </mat-form-field>
+          </div>
+        </div>
+      
+      <mat-form-field class="query_input distanza">
+        <textarea
+          matInput
+          placeholder="Lineage"
+          [(ngModel)]="query.lineage"
+        ></textarea>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+</div>

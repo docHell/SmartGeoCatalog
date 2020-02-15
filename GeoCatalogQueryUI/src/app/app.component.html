@@ -1,0 +1,63 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-card class="distanza titolo mat-elevation-z6">
+  <mat-card-title>
+    <div class="mrow">
+      <div class="column_sx">
+        <img
+          style="float: left; margin: 0px 5px 5px 0px;"
+          src="./assets/img/logo5.png"
+          width="700"
+        />
+        <br style="clear: both;" />
+      </div>
+      <div class="column_dx">
+        <button
+          mat-raised-button
+          [color]="'success'"
+          class="distanza2"
+          routerLink="/"
+        >
+          Query
+        </button>
+        <button
+          mat-raised-button
+          [color]="'success'"
+          class="distanza3"
+          routerLink="/status"
+        >
+          Status
+        </button>
+      </div>
+      <div class="column_dx">
+        <button
+          mat-raised-button
+          [color]="'success'"
+          class="distanza2"
+          routerLink="/up"
+        >
+          UpLoad
+        </button>
+        <button
+          mat-raised-button
+          [color]="'success'"
+          class="distanza3"
+          (click)="goToLink()"
+        >
+          UGBD Project
+        </button>
+      </div>
+    </div>
+  </mat-card-title>
+</mat-card>
+
+<section>
+  <router-outlet></router-outlet>
+</section>
+
+<footer>
+  <mat-card class="distanza titolo mat-elevation-z6">
+    <mat-card-content>
+      <p>&copy; Work in progress <i>CNR Irea</i> 2019 - v.0.0.9a</p>
+    </mat-card-content>
+  </mat-card>
+</footer>

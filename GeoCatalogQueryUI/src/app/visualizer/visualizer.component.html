@@ -1,0 +1,37 @@
+<mat-card class="barraviola distanzatitolo mat-elevation-z6">
+  <mat-card-subtitle class="barrabacktext">
+    <b>MetaData View   </b>
+  </mat-card-subtitle>
+</mat-card>
+
+
+<mat-card class="barratop mat-elevation-z6">
+  <mat-card-content class="barrabacktext "  >
+    <div class="row">
+      <div class="column_a" (click)="backList()">
+        <i class="material-icons"> undo </i> Back
+      </div>
+      <div class="column_b" *ngIf="!to_confirm" >
+        <button class="distanza_b" type="button"  mat-raised-button (click)="download()">RNDT XML Download</button>
+      </div>
+    </div>
+     
+    </mat-card-content>
+</mat-card>  
+<mat-card class="distanza corpo_titolo mat-elevation-z6" *ngIf="to_confirm" >
+  <mat-card-title class="bold_text"> Do you want to save the metadata ? </mat-card-title>
+  <mat-card-content>
+    <div class="row_singolo">
+        <button class="distanza_b" type="button"  mat-raised-button (click)="upload()">Save it! </button>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card class='distanza'>
+  <div #one id="one"></div>
+</mat-card>
+ 
+<mat-card class="barraback mat-elevation-z6">
+  <mat-card-title class="barrabacktext" (click)="backList()" >
+      <i class="material-icons"> undo </i> Back
+    </mat-card-title>
+</mat-card>

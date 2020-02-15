@@ -1,0 +1,108 @@
+{
+  "fileIdentifier": "CNR_MILANO_DEFORMAZIONE_MAP",
+  "language": "eng",
+  "characterSet": "utf8",
+  "hierarchyLevel": "dataset",
+  "contact": {
+    "organisationName": "CNR-IREA Napoli",
+    "contactInfo": {
+      "address": { "electronicMailAddress": "mailto:pepe.a@irea.cnr.it" }
+    },
+    "role": "pointOfContact"
+  },
+  "dateStamp": "2018-12-24T00:00:00.000Z",
+  "metadataStandardName": "DM - Regole tecniche RNDT",
+  "metadataStandardVersion": "10 novembre 2011",
+  "identificationInfo": {
+    "citation": {
+      "title": "Mean Velocity Displacement Map of the Milano urban area",
+      "date": [
+        { "date": "2018-12-24T00:00:00.000Z", "dateType": "publication" }
+      ],
+      "identifier": "CNR_MILANO_DEFORMAZIONE_MAP"
+    },
+    "abstract": "We present a case study on the migration to a cloud computing environment of the results produced by the multi-temporal differential synthetic aperture radar interferometry (DInSAR) technique, referred to as Small BAseline Subset (SBAS). The technique, which was proposed in 2002, is widely used for the investigation of Earth surface deformation phenomena, and allows the generation of mean displacement velocity maps as well as, for each coherent target on the ground, deformation time-series. It relies on the analysis of a stack of low-resolution (multilooked) differential SAR interferograms, and produces DInSAR products with a resolution on the ground on the order of 80 m x 80 m (considering the parameters of the first-generation ERS and ENVISAT radar sensors). Subsequently, in 2004, an extension of the SBAS technique for the detection of the Earth?s surface displacements at the full spatial resolution was also developed and presented. In particular, here, we focus on the parallel implementation of the SBAS codes, leading to the so-called Parallel-SBAS (P-SBAS) algorithm, which allows the productions of DInSAR products, starting from a sequence of SAR images of the investigated area, by using distributed computing architectures. The Cloud migration has been carried out by encapsulating the overall P-SBAS application in virtual machines that run on the cloud. Moreover, the cloud resources provisioning and configuration phases have been implemented in an automatic way.Such an approach allowed to preserve the P-SBAS parallelization strategy and to traightforwardly evaluate its performance within a cloud environment, by comparing it with those achieved on a HPC in-house cluster. The presented results have been achieved by using the multi-scale, full-resolution, SBAS technique, which is based on the preliminary generation of multiooked DInSAR products (regional scale), and then their exploitation for the generation of full-resolution DInSAR products (local scale). Regional scale products have been generated using the P-SBAS method. The used dataset consists in 164 SAR images (Track 36, descending orbits) collected by the ERS and the ENVISAT satellites, and span the whole time period between June 1992 and September 2010. It is worth further remarking that using cloud resources availability and flexibility, large DInSAR data volume can be processed by the P-SBAS algorithm, see the literature.The performed analysis allows us to identify the major bottlenecks that can hamper the P-SBAS performances within a CC environment, in the perspective of processing very huge SAR data flows such as those coming from the existing COSMO-SkyMed or the upcoming SENTINEL-1 constellation. This work represents a relevant step toward the challenging Earth Observation scenario focused on the joint exploitation of advanced DInSAR techniques and CC environments for the massive processing of Big SAR Data.Reference : Ivana Zinno, Francesco Casu, Claudio De Luca, Stefano Elefante, Riccardo Lanari, Michele Manunta, ?A cloud computing solution for the efficient implementation of the P-SBAS DInSAR approach,?, IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, vol 10, n.3, pp. 802-817.",
+    "pointOfContact": [
+      {
+        "organisationName": "CNR-IREA Napoli",
+        "contactInfo": {
+          "address": {
+            "electronicMailAddress": "mailto:pepe.a@irea.cnr.it"
+          }
+        },
+        "role": "pointOfContact"
+      }
+    ],
+    "descriptiveKeywords": [
+      {
+        "keyword": ["Geographical grid systems"],
+        "thesaurusName": {
+          "title": "GEMET - INSPIRE themes, version 1.0",
+          "date": [
+            {
+              "date": "2008-06-01T00:00:00.000Z",
+              "dateType": "publication"
+            }
+          ]
+        }
+      },
+      {
+        "keyword": [
+          "Deformation, SAR interferometry, SBAS Deformation Geographical grid systems"
+        ]
+      },
+      {
+        "keyword": ["Deformation"],
+        "thesaurusName": {
+          "title": "RITMARE - Parameter Usage Vocabulary",
+          "date": [
+            {
+              "date": "2013-07-08T00:00:00.000Z",
+              "dateType": "publication"
+            }
+          ]
+        }
+      }
+    ],
+    "resourceConstraints": [
+      { "accessConstraints": ["restricted"] },
+      { "useConstraints": ["restricted"] }
+    ],
+    "spatialRepresentationType": "vector",
+    "spatialResolution": {
+      "distance": {
+        "unit": "http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/uom/ML_gmxUom.xml#m",
+        "value": 80
+      }
+    },
+    "characterSet": "utf8",
+    "extent": [
+      {
+        "geographicElement": {
+          "westBoundLongitude": 9.09069,
+          "eastBoundLongitude": 9.6169,
+          "southBoundLatitude": 45.30822,
+          "northBoundLatitude": 45.58249
+        }
+      }
+    ]
+  },
+  "distributionInfo": {
+    "distributionFormat": [{ "name": "PNG", "version": "1.0" }],
+    "transferOptions": [
+      {
+        "onLine": [
+          {
+            "linkage": "https://ugbd.get-it.it/geoserver/geonode/wms?service=WMS&version=1.1.0&request=GetMap&layers=geonode:MILANO_DEFORMAZIONE_MAP&styles=&bbox=9.09069,45.30822,9.6169,45.58249&width=633&height=330&srs=EPSG:4326&format=application/openlayers"
+          }
+        ]
+      }
+    ]
+  },
+  "dataQualityInfo": {
+    "lineage": {
+      "statement": "The analysis of surface deformations in the urban area of Naples has been carried out using the full- resolution adaptation of the Small Baseline Subset (SBAS) interferometric differential synthetic aperture radar (DInSAR) technique. SAR data were acquired at C band by the ERS and ENVISAT satellite platforms of the European Space Agency. The applied technique allows performing detailed analyses in urban areas and allows detecting very spatially localized deformation signals, such as those relative to single buildings and public infrastructures, highlighting the relative displacements of coherent structures with respect to the average movement of the ground. The process involved 164SAR images, corresponding to Track 36 (descending orbits), acquired from June 1992 to September 2010, Starting from these images, 485 InSAR SB data pairs have been selected, with a maximum perpendicular baseline of 400 m. The topographical; phase components have been removed using an SRTM digital elevation model (DEM) of the area, with a resolution of about 80 x 80 mVel : Mean displacement velocity value [cm/year]Coer : Temporal coherence, which quantifies the goodness of the achieved solution. Only pixels with temporal coherence values larger than 0.7 are considered reliable and visualized.Cosn : North direction cosine  Cose : East direction cosine  Cosu : Up direction cosine  Id : Id number  Topo : height topography of the considered pixel calculated w.r.t. the reference ellipsoid."
+    }
+  },
+  "@elementType": "MD_Metadata"
+}

@@ -1,0 +1,129 @@
+.row {
+  width: 100%;
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column_img {
+  float: left;
+  width: 25%;
+  /* margin-top: 5px; */
+}
+.column_text {
+  float: left;
+  width: 75%;
+
+  /* margin-top: 5px; */
+}
+
+.example-card {
+  margin-top: 7px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 7px;
+  max-width: 1000px;
+  padding: 10px;
+}
+
+.example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
+}
+.colorfound {
+  background-color: magenta;
+  color: #fff;
+  /* margin: 5px; */
+}
+
+.column_20 {
+  float: left;
+  width: 20%;
+  margin-top: 0px;
+}
+
+.column_80 {
+  float: left;
+  width: 80%;
+  margin-top: 7px;
+  font-weight: bold;
+}
+.text {
+  position: relative;
+  font-size: 14px;
+  color: black;
+  font-family: sans-serif;
+  width: 1000px; /* Could be anything you like. */
+}
+
+.text-concat {
+  position: relative;
+  display: inline-block;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em; /* (Number of lines you want visible) * (line-height) */
+  line-height: 1.2em;
+  text-align: justify;
+}
+
+.text.ellipsis::after {
+  content: "...";
+  position: absolute;
+  right: 5px;
+  bottom: 10px;
+}
+
+.text2 {
+  position: relative;
+  font-size: 14px;
+  color: black;
+  font-family: sans-serif;
+  width: 1000px; /* Could be anything you like. */
+}
+
+.text2-concat {
+  position: relative;
+  display: inline-block;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 5.6em; /* (Number of lines you want visible) * (line-height) */
+  line-height: 1.2em;
+  text-align: justify;
+}
+
+.text2.ellipsis::after {
+  content: "...";
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+.barraback {
+  margin-top: 5px;
+  height: 15px;
+  background-color: rgb(168, 168, 168);
+  color: #fff;
+}
+.barrabacktext {
+  /* height: 15px; */
+  color: #fff;
+  font-size: 18px;
+}
+.sopra {
+  /* height: 15px; */  
+  padding-bottom: 35px;
+  
+  
+}
+.barraviola {
+  background-color: magenta;
+
+  color: #fff;
+}
+
+.titolo {
+  background-color: rgb(69, 167, 231);
+  color: #fff;
+  font-weight: bold;
+  margin-top: 5px;
+}

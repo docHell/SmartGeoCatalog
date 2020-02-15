@@ -1,0 +1,71 @@
+<mat-card class="barraviola distanzatitolo mat-elevation-z6">
+  <mat-card-subtitle class="barrabacktext">
+    <b>Single Metadata Upload</b>
+  </mat-card-subtitle>
+</mat-card>
+
+
+<mat-card class="distanza  corpo_search mat-elevation-z6" *ngIf="!file_list">
+  <mat-card-subtitle class="bold_text"> RNDT UPLOAD : </mat-card-subtitle>
+  <mat-card-content>
+    <div class="row_singolo">
+      <button
+        class="distanza_b"
+        type="button"
+        mat-raised-button
+        (click)="filechoser.click()"
+      >
+        Choose a File
+      </button>
+      <input
+        hidden
+        (change)="fileInput($event)"
+        #filechoser
+        type="file"
+        id="filechoser"
+      />
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="distanza corpo_titolo mat-elevation-z6" *ngIf="export">
+  <mat-card-title class="bold_text">
+    Click to upload : {{ file_list.name }}</mat-card-title
+  >
+</mat-card>
+
+<!-- <mat-nav-list   class="distanza corpo_search mat-elevation-z6"  *ngIf="file_list" >
+      <mat-list-item *ngFor="let fe of file_list">
+        <button   mat-raised-button class="distanza corpo_search" (click)="remove(fe.name)">
+          {{ fe.name }}
+        </button>
+      </mat-list-item>
+  </mat-nav-list>   -->
+
+<mat-card class="distanza corpo_search mat-elevation-z6" *ngIf="file_list">
+  <!-- <mat-card-subtitle class="bold_text"> Click to upload : {{file_list.name }}</mat-card-subtitle> -->
+  <mat-card-content>
+    <div class="row_singolo">
+      <div class="column_50">
+        <button
+          class="distanza_b bottone"
+          type="button"
+          mat-raised-button
+          (click)="remove()"
+        >
+          Remove
+        </button>
+      </div>
+      <div class="column_50">
+        <button
+          class="distanza_b bottone"
+          type="button"
+          mat-raised-button
+          (click)="upload()"
+        >
+          Encode to Upload
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

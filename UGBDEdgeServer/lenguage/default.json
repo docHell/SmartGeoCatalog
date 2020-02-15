@@ -1,0 +1,191 @@
+{
+  "fileIdentifier": [
+    { "it": "Identificatore del file" },
+    { "en": "Metadata file identifier" }
+  ],
+
+  "characterSet": [
+    { "it": "Set dei caratteri dei metadati" },
+    { "en": "Metadata character set" }
+  ],
+  "hierarchyLevel": [
+    { "it": "Livello gerarchico" },
+    { "en": "Hierarchy Level" }
+  ],
+  "metadataStandardName": [
+    { "it": "Nome dello Standard" },
+    { "en": "Metadata standard name " }
+  ],
+  "metadataStandardVersion": [
+    { "it": "Versione dello Standard" },
+    { "en": "Metadata standard version" }
+  ],
+  "contact": [
+    { "it": "Punto di contatto" },
+    { "en": "Dataset responsible party" }
+  ],
+  "organisationName": [
+    { "it": "Nome dell’Ente " },
+    { "en": "Organisation name" }
+  ],
+  "role": [{ "it": "Ruolo" }, { "en": "Role" }],
+  "contactInfo": [
+    { "it": "Informazioni di contatto" },
+    { "en": "Contact Info" }
+  ],
+
+  "address": [{ "it": "Indirizzo" }, { "en": "Address" }],
+
+  "electronicMailAddress": [
+    { "it": "E-mail" },
+    { "en": "Electronic Mail Address" }
+  ],
+
+  "onlineResource": [{ "it": "Risorsa on-line" }, { "en": "Online resource" }],
+
+  "linkage": [{ "it": "Link" }, { "en": "Linkage" }],
+
+  "dateStamp": [{ "it": "Data dei metadati" }, { "en": "Datestamp" }],
+
+  "identificationInfo": [
+    { "it": "Identificazione dei dati" },
+    { "en": "Identification Info" }
+  ],
+
+  "abstract": [
+    { "it": "Descrizione" },
+    { "en": "Abstract describing the dataset" }
+  ],
+
+  "spatialRepresentationType": [
+    { "it": "Tipo di rappresentazione spaziale" },
+    { "en": "Spatial representation type" }
+  ],
+
+  "language": [{ "it": "Lingua" }, { "en": "Language" }],
+
+  "topicCategory": [
+    { "it": "Categoria tematica" },
+    { "en": "Dataset topic category" }
+  ],
+
+  "citation": [{ "it": "Citazione" }, { "en": "Citazione" }],
+
+  "title": [{ "it": "Titolo" }, { "en": "Title" }],
+  "date": [{ "it": "Data" }, { "en": "Date" }],
+
+  "dateType": [{ "it": "Tipo data" }, { "en": "Date Type" }],
+
+  "identifier": [{ "it": "Identificatore" }, { "en": "Identifier" }],
+
+  "pointOfContact": [
+    { "it": "Punto di contatto" },
+    { "en": "Dataset responsible party" }
+  ],
+
+  "resourceMaintenance": [
+    { "it": "Gestione dei dati" },
+    { "en": "Resource maintenance" }
+  ],
+
+  "maintenanceAndUpdateFrequency": [
+    { "it": "Frequenza di aggiornamento" },
+    { "en": "Update frequency" }
+  ],
+
+  "graphicOverview": [ 
+    { "it": "Panoramica grafica" },
+    { "en": "Graphic overview" }
+  ],
+
+  "fileName": [{ "it": "Nome del file" }, { "en": "File name" }],
+  "fileType": [{ "it": "Tipo di file" }, { "en": "File type" }],
+
+  "descriptiveKeywords": [
+    { "it": "Parole chiave descrittive" },
+    { "en": "Descriptive keywords" }
+  ],
+
+  "keyword": [{ "it": "Parola chiave" }, { "en": "Keyword" }],
+
+  "thesaurusName": [{ "it": "Thesaurus" }, { "en": "Thesaurus Name" }],
+
+  "resourceConstraints": [
+    { "it": "Limitazioni della risorsa" },
+    { "en": "Resource Constraints" }
+  ],
+
+  "accessConstraints": [
+    { "it": "Vincoli di accesso" },
+    { "en": "Access Constraints" }
+  ],
+  "useConstraints": [
+    { "it": "Limitazione d/’uso " },
+    { "en": "Resource Constraints" }
+  ],
+  "otherConstraints": [
+    { "it": "Altre limitazioni" },
+    { "en": "Other Constraints" }
+  ],
+
+  "spatialResolution": [
+    { "it": "Risoluzione spaziale"},
+    { "en": "Spatial Resolution" }
+  ],
+
+  "equivalentScale": [
+    { "it": "Scala equivalente" },
+    { "en": "Equivalent Scale" }
+  ],
+  "denominator": [{ "it": "Denominatore" }, { "en": "Denominator" }],
+  "extent": [{ "it": "Estensione dei dati" }, { "en": "Data extension" }],
+  "geographicElement": [
+    { "it": "Localizzazione geografica" },
+    { "en": "Geographic Element" }
+  ],
+  "westBoundLongitude": [
+    { "it": "Longitudine ovest" },
+    { "en": "WestBound Longitude" }
+  ],
+  "eastBoundLongitude": [
+    { "it": "Longitudine est" },
+    { "en": "EastBound Longitude" }
+  ],
+  "southBoundLatitude": [
+    { "it": "Latitudine sud " },
+    { "en": "SouthBound Latitude" }
+  ],
+  "northBoundLatitude": [
+    { "it": "Latitudine nord" },
+    { "en": "NorthBound Latitude" }
+  ],
+
+  "distributionInfo": [
+    { "it": "Distribuzione dei dati" },
+    { "en": "Distribution Info" }
+  ],
+  "distributionFormat": [
+    { "it": "Formato di distribuzione" },
+    { "en": "Distribution Format" }
+  ],
+
+  "version": [{ "it": "Versione" }, { "en": "Version" }],
+
+  "transferOptions": [
+    { "it": "Risorsa on-line " },
+    { "en": "TransferOptions" }
+  ],
+
+  "type": [{ "it": "Tipo" }, { "en": "Type" }],
+
+  "dataQualityInfo": [
+    { "it": "Qualità dei dati " },
+    { "en": "Data Quality Info" }
+  ],
+  "scope": [{ "it": "Scopo" }, { "en": "Scope" }],
+  "level": [{ "it": "Livello" }, { "en": "Level" }],
+
+  "lineage": [{ "it": "Genealogia" }, { "en": "Lineage" }],
+
+  "statement": [{ "it": "Dichiarazione" }, { "en": "Statement" }]
+}

@@ -1,0 +1,234 @@
+.row:after {
+  width: 100%;
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row_singolo:after {
+  width: 100%;
+  content: "";
+  display: table;
+  margin-top: 5px;
+  clear: both;
+}
+
+.general_content {
+  width: 100%;
+  margin-top: 5px;
+  clear: both;
+}
+
+.column {
+  float: left;
+  width: 25%;
+
+  margin-top: 5px;
+}
+.column_90 {
+  float: left;
+  width: 90%;
+
+  margin-top: 5px;
+}
+
+.column_50 {
+  float: left;
+  width: 50%;
+
+  margin-top: 5px;
+}
+.column_80 {
+  float: left;
+  width: 80%;
+
+  margin-top: 5px;
+}
+.column_75 {
+  float: left;
+  width: 75%;
+
+  margin-top: 5px;
+}
+
+.column_65 {
+  float: left;
+  width: 65%;
+
+  margin-top: 5px;
+}
+
+.column_60 {
+  float: left;
+  width: 60%;
+
+  margin-top: 5px;
+}
+.column_10 {
+  float: left;
+  width: 10%;
+  text-align: center;
+
+  margin-top: 5px;
+}
+.column_20 {
+  float: left;
+  width: 20%;
+  text-align: center;
+
+  margin-top: 5px;
+}
+
+.column_35 {
+  float: left;
+  width: 35%;
+  text-align: right;
+
+  margin-top: 5px;
+}
+
+.column_20_where {
+  float: right;
+  width: 20%;
+  text-align: right;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.query_input {
+  width: 100%;
+}
+
+.distanza {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+.distanzatitolo {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.bottoneconferma {
+  height: 30px;
+  margin-top: 15px;
+}
+.unit_of_m {
+  width: 90%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.titolo {
+  background-color: rgb(69, 167, 231);
+  color: #fff;
+}
+
+.subtitolo {
+  background-color: rgb(133, 186, 221);
+  color: #fff;
+}
+
+.bold_text {
+  font-weight: bold;
+}
+
+.corpo_search {
+  background-color: rgb(205, 223, 235);
+  color: #fff;
+}
+.corpo_searched {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.corpo {
+  background-color: rgb(205, 223, 235);
+  color: #fff;
+  min-height: 170px;
+}
+
+.corpo2 {
+  background-color: #fff;
+  color: #000;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 4px;
+  margin: 0px;
+}
+
+.corpowho {
+  background-color: #fff;
+  color: #000;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 4px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 30px;
+  margin-bottom: 0px;
+
+}
+
+
+.corpo2date {
+  background-color: #fff;
+  color: #000;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 4px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 5px;
+}
+
+.mat-success {
+  background-color: rgb(69, 167, 231);
+  color: #fff;
+}
+
+.mat-subsuccess {
+  background-color: rgb(231, 69, 231);
+  color: #fff;
+}
+.mappa {
+  width: 100%;
+  height: 600px;
+  border: 1px solid black;
+}
+
+.mini_mappa {
+  width: 100%;
+  height: 200px;
+  border: 1px solid black;
+}
+.mini_quality {
+  width: 100%;
+  height: 200px;
+  border: 0px solid black;
+}
+.card-5 {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  height: 300px;
+  margin: 1rem;
+  position: relative;
+  width: 300px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.card-1 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.barraviola {
+  background-color: magenta;
+
+  color: #fff;
+}
+.barrabacktext {
+  /* height: 15px; */
+  font-size: 16px;
+  color: #fff;
+}

@@ -1,0 +1,60 @@
+.separatore {
+  margin-top: 7px;
+}
+
+.barraviola {
+  background-color: magenta;
+
+  color: #fff;
+}
+
+.distanza {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.barragrigia {
+  background-color: rgb(168, 168, 168);
+  color: #fff;
+}
+.barrabacktext {
+  /* height: 15px; */
+  font-size: 16px;
+  color: #fff;
+}
+
+.testo {
+  font-size: 16px;
+}
+
+.titolo {
+  background-color: rgb(69, 167, 231);
+  color: #fff;
+  font-weight: bold;
+}
+.row:after {
+  width: 100%;
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row_singolo:after {
+  width: 100%;
+  content: "";
+  display: table;
+  margin-top: 5px;
+  clear: both;
+}
+
+.column_a {
+  float: left;
+  width: 35%;
+
+  margin-top: 5px;
+}
+.column_b {
+  float: left;
+  width: 65%;
+ 
+}

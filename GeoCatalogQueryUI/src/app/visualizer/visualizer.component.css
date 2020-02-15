@@ -1,0 +1,87 @@
+.distanza {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.barraback {
+  margin-top: 5px;
+  height: 15px;
+  background-color: rgb(168, 168, 168);
+  color: #fff;
+}
+
+
+.barratop {
+  margin-top: 5px;
+  
+  background-color: rgb(168, 168, 168);
+  color: #fff;
+}
+.barrabacktext {
+  /* height: 15px; */
+  font-size: 18px;
+}
+
+.card-5 {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  height: 300px;
+  margin: 1rem;
+  position: relative;
+  width: 300px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+.corpo_titolo {
+  background-color: deepskyblue;
+  color: #fff;
+  
+}
+
+.card-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.barraviola {
+  background-color: magenta;
+
+  color: #fff;
+}
+
+.distanzatitolo {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.barrabacktext {
+  /* height: 15px; */
+  font-size: 16px;
+  color: #fff;
+}
+
+.row:after {
+  width: 100%;
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row_singolo:after {
+  width: 100%;
+  content: "";
+  display: table;
+  margin-top: 5px;
+  clear: both;
+}
+
+.column_a {
+  float: left;
+  width: 90%;
+
+  margin-top: 5px;
+}
+.column_b {
+  float: left;
+  width: 10%;
+ 
+}

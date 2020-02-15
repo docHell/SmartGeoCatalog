@@ -1,0 +1,53 @@
+<mat-card class="barraviola distanza mat-elevation-z6">
+  <mat-card-subtitle class="barrabacktext">
+    <b>UGBD Geocatalog Status</b>
+  </mat-card-subtitle>
+</mat-card>
+
+
+<mat-card class="titolo mat-elevation-z6">
+  <mat-card-subtitle class="barrabacktext">
+    In this Node :
+  </mat-card-subtitle>
+</mat-card>
+<mat-card class="distanza   mat-elevation-z6">
+
+  <mat-card-content>
+      <p class="testo">Number of Metadata : {{ c_metadata }} </p>
+  </mat-card-content>
+
+
+</mat-card>
+
+<mat-card class="distanza  mat-elevation-z6">
+    <mat-card-content>
+      <p class="testo">Number of Authors : {{ c_authors }}</p>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="titolo mat-elevation-z6">
+  <mat-card-subtitle class="barrabacktext">
+    Micro Services Status :
+  </mat-card-subtitle>
+</mat-card>
+<div class="row">
+  <div class="column_a">
+    <mat-card
+    *ngFor="let risposta of risposte"
+    class="example-card mat-elevation-z6 separatore"
+  >
+    <mat-card-content>
+      <p class="testo">Server : <b>{{ risposta.status }}</b></p>
+      <p>Last time online : {{ risposta.data | date:'medium' }}</p>
+    </mat-card-content>
+  </mat-card>
+  </div>
+  <div class="column_b">
+    <img
+    style="float: left; margin-top: 10px; margin-left: 100px; margin-right: auto;"
+    src="./assets/img/schema.png"
+    
+  />
+  </div>
+</div>
+
