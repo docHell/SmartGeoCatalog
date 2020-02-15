@@ -28,7 +28,7 @@
     "express": "^4.16.3",
     "https": "^1.0.0",
     "inspire-parser-quality": "0.0.5",
-    "mongoose": "^5.6.10",
+    "mongoose": "^5.7.5",
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-sequence": "^4.0.1",
     "nodejs-base64": "^1.0.3",
