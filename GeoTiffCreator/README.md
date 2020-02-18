@@ -2,6 +2,7 @@
 
 #### This is an experimental software.
 It has been used to create GeoTiff from a csv file created analyzing the displacement time-series map of some italian cities.
+It has been selected only one deformation value per year to expect that the relative deformation in one-year is considerably higher than the accuracy of the measurement.
 
 
 
@@ -40,3 +41,38 @@ Then you can install the latest version of GDAL as:
 
 You can confirm by typing in gdalinfo --version or ogrinfo on your terminal.
 
+
+### HOW TO USE
+
+* ANALYSE YOU CSV
+```typescript
+Analysis.getInstance().doAnalysis(filePathToAnalyze,ROWS);
+```
+Yes, you need to know how many rows you want to analyse ( I told you it is an experimental software ) 
+
+This analysis will provide the bounding box and some other data like the min and max values.
+
+* CREATE GEOJSON FILES
+
+```typescript
+GeoJsonCreator.getInstance().createGeoJson(filePathToAnalyze,ROWS,dirPathForGeoJson,maxValue).subscribe( (status : boolean) => {
+  if (status) {
+    // It ok, now correct the files.
+      GeoJsonCreator.getInstance().correctGeoJson(dirPathForGeoJson);
+  } else {
+    // some errors    
+  }
+})
+```
+maxValue is a number provided by the analysis
+
+* CREATE A GEOTIFF FOR EACH GEOJSON ( 1 folder for year ) 
+```typescript
+GeoTiffCreator.getInstance().createGeoTiff(dirPathOfTheGeoJsonFiles);
+```
+
+* MERGE THE GEOTIFF (1 geotiff for year )
+```typescript
+GeoTiffCreator.getInstance().mergeTiff(dirPathOfTheGeoJsonFiles);
+
+```
