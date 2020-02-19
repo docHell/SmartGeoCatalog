@@ -72,7 +72,13 @@ GeoTiffCreator.getInstance().createGeoTiff(dirPathOfTheGeoJsonFiles);
 ```
 
 * MERGE THE GEOTIFF (1 geotiff for year )
+
+widht -> image pixel width
+height -> image pixel height
+you can use the aspect ratio suggested after the analysis
+
+
 ```typescript
-GeoTiffCreator.getInstance().mergeTiff(dirPathOfTheGeoJsonFiles);
+GeoTiffCreator.getInstance().mergeTiff(dirPathOfTheGeoJsonFiles, width, height);
 
 ```
