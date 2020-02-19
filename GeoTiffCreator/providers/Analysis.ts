@@ -92,29 +92,20 @@ export class Analysis {
 
             while (!found) {
               let value = Math.floor(((conta - 1 + Constant.MIN_R) * 10)) / 10;
-
-              // console.log("-->" + JSON.stringify(csvrow));
-              // console.log("value  ", value);
-              // console.log("+csvrow[4]  ", +csvrow[4]);
+ 
               if (+csvrow[4] <= value) {
                 let val: number = Math.round((conta - Constant.FINE_MEASURE) / Constant.FINE_MEASURE) - 1;
-                // console.log("val  ", val);
-                // console.log("-->  ", conta);
+ 
                 value_dist[val] = value_dist[val] + 1;
-                if (+csvrow[4] < 0) {
-                  // console.log("--> VAL!  :", val);
-                  // console.log("--> VALue!  :", value);
-                  // console.log("--> +csvrow[4]  :", +csvrow[4]);
-                  // console.log("-----------------------------");
+                if (+csvrow[4] < 0) { 
                   for (let i = 0; i < value_dist.length; i++) {
                     var bottom = Math.round((Constant.MIN_R - 1 + (Constant.FINE_MEASURE * i)) * 10) / 10;
                     var top = Math.round((Constant.MIN_R - 1 + (Constant.FINE_MEASURE * i) + Constant.FINE_MEASURE ) * 10) / 10;
-                    // console.log("["+i+"][" + bottom + "," + top + "] -> " + value_dist[i]);
+                 
                   }
                 }
                 found = true;
-                // console.log(JSON.stringify(value_dist));
-
+              
               } else {
                 conta = conta + Constant.FINE_MEASURE ;
               }

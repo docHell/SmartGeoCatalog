@@ -5,10 +5,8 @@ import { Constant } from './../models/Constants';
 import { DateUtil } from './DateUtil';
 import fs = require("fs");
 import parse = require("csv-parse");
-import { UUID } from "angular2-uuid";
 import { Utils } from "./Utils";
 
-import { exec } from "child_process";
 export class GeoTiffCreator {
   private static _instance: GeoTiffCreator;
 
@@ -18,7 +16,7 @@ export class GeoTiffCreator {
     GeoTiffCreator._instance = this;
   }
 
-  public createGeoTiff(FILEPATH: string) {
+  public createGeoTiff(FILEPATH: string, width : number, height : number ) {
     let end: string = "]}";
 
     console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -110,7 +108,7 @@ export class GeoTiffCreator {
           //PADOVA 
           // " -ts 2160 1938 "+ 
 
-          " -ts 1080 969 " +
+          " -ts " + width + " " + height + " "
           filenameout +
           " " +
           imageout

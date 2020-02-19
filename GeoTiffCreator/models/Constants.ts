@@ -1,5 +1,6 @@
 export class Constant {
 
+ 
 
     public static readonly FINE_MEASURE: number = 0.1;
 

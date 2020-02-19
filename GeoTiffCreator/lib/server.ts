@@ -44,5 +44,8 @@ GeoJsonCreator.getInstance().createGeoJson(toAnalyze,ROWS,FILEPATH,MAXVALUE).sub
 
 // Check the files and the uncomment next line. 
 // Now Merge Them
+// widht -> image pixel width
+// height -> image pixel height
+// u can use the aspect ratio suggested in the analysis
 
-//GeoTiffCreator.getInstance().mergeTiff(FILEPATH);
+//GeoTiffCreator.getInstance().mergeTiff(FILEPATH, width, height);
