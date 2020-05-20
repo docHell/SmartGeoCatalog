@@ -5,11 +5,17 @@ export class Risposta {
     valore : any;
 
 
-    constructor(status: string, esito : boolean, value : object) {
+    constructor(status: string, esito : boolean, valore : object) {
         this.data = new Date();
         this.status = status;
         this.esito = esito;
-        this.valore = value;
+        this.valore = valore;
     }
-    
+
+    public static of(r : any) : Risposta {
+        console.log(r);
+        let exit = new Risposta(r.status,r.esito,r.valore);
+        exit.data = new Date(r.data);
+        return exit;
+    }
 }

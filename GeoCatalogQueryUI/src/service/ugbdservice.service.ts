@@ -9,9 +9,9 @@ import { Risposta } from 'src/app/models/Risposta';
 
 
 export class UGBDServiceService {
-   public static URL: string = 'https://www.fhffcapp.it/edge/';
+  //  public static URL: string = 'https://www.fhffcapp.it/edge/';
   
-  // public static URL: string = 'http://localhost:3700/';
+  public static URL: string = 'http://localhost:3800/';
   // public static URL: string = 'https://www.fhffcapp.it/query/';
   // public static URL: string = 'https://www.lucafrigerio.com/query/';
   private GET_ALL = UGBDServiceService.URL + 'getAll/';

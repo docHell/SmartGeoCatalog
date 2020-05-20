@@ -7,11 +7,14 @@ import { MongoExport } from "../models/MongoExport";
 import { Risposta } from "../models/Risposta";
 import {Md5} from 'ts-md5/dist/md5'; 
 import { ExportParsing, ExportParsed } from '../models/ExportParsing';
+
+const Parser = require("inspire-parser-quality").Parser;
+
 export class ParserJob {
   private static _instance: ParserJob;
   public static readonly CHILDREN: string = "children";
   public static readonly GEOGRAPHICELEMENT: string = "geographicElement";
-
+  
 
   private constructor() {
     ParserJob._instance = this;
@@ -35,9 +38,9 @@ export class ParserJob {
   
   public static estractNumeric(doc : any) {
     try {
-    console.log("Prima : " + doc.dataQualityInfo.report.result.value.Real);
+    // console.log("Prima : " + doc.dataQualityInfo.report.result.value.Real);
     doc.dataQualityInfo.report.result.value.Real = parseFloat(doc.dataQualityInfo.report.result.value.Real);
-    console.log("Dopo : " + doc.dataQualityInfo.report.result.value.Real);
+    // console.log("Dopo : " + doc.dataQualityInfo.report.result.value.Real);
     } catch (err) {
       console.log("Non c'è questo valore!");
     }
@@ -212,8 +215,8 @@ export class ParserJob {
     
     let exit: Subject<Risposta> = new Subject<Risposta>();
 
-    var Parser = require("inspire-parser-quality").Parser;
-    var parser = new Parser();
+    
+    let parser = new Parser();
     // console.log("********************************************")
     try {
       console.log("-> Step 1 ")
@@ -226,17 +229,17 @@ export class ParserJob {
         console.log("********************************************")
         console.log("Errore -> " + err)
         console.log("********************************************")
-      }).once("result", (result, err) => {
-        console.log("********************************************")
-        console.log("ENTRO FINE")
-        console.log("********************************************")
-        console.log(err)
-        console.log("********************************************")
-        console.log(result)
-        console.log("********************************************")
+        exit.next(new Risposta("ERROR PARSING", false, err));
+      }).once("result", (result ) => {
+        // console.log("********************************************")
+        // console.log("ENTRO FINE")
+         
+       
+        // console.log(result)
+        // console.log("********************************************")
         let doc: any = ParserJob.geoFilter(ParserJob.childrenFilter(result.body));
         doc = ParserJob.estractNumeric(doc);
-        console.log(doc)
+        // console.log(doc)
         // console.log("***********************************************************************");
         let aaa = ParserJob.findEmails(doc,  []);
         let id: string = Md5.hashStr(JSON.stringify(doc)).toString();
@@ -251,10 +254,11 @@ export class ParserJob {
         esito.mongoExport = exit_mongo;
 
         esito.end_date = new Date(); 
+        
+        
+        // console.log("Finish");
+        // console.log("********************************************")
         exit.next(new Risposta("OK Parsed ", true, esito));
-        console.log("--------------------1---------------------------");
-        console.log(JSON.stringify(exit));
-        console.log("--------------------1---------------------------");
       }) 
     } catch (error) {
       console.log("-----------------------------------------------");

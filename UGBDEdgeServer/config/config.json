@@ -1,0 +1,9 @@
+{
+    "services" : ["QueryService","ParserService","MongoDbService","ElasticService","LogService"],
+    "frequency" :  300000,
+    "LOG_TOPIC" :  "log_topic",
+    "port": 3800,
+    "name" : "EdgeService",
+    "STATUS_TOPIC" :  "status_component",
+    "mqtt" : "mqtt://172.17.0.1:1883"
+}

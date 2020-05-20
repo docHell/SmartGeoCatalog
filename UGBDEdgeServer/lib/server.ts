@@ -1,51 +1,108 @@
+import { EventRemote } from './../providers/EventRemote';
+import { RemoteStatus } from './../providers/RemoteStatus';
 import { QueryRemote } from './../providers/QueryRemote';
-
-
 import app from "./app";
 import { Risposta } from '../models/Risposta';
 import { ParserRemote } from '../providers/ParserRemote';
 import { ElasticRemote } from '../providers/ElasticRemote';
 import { MongoRemote } from '../providers/MongoRemote';
 
-const PORT = 3800;
+import CONFIG from '../config/config.json';
+
+
+const TOPIC = "update_csw";
+const ELASTIC_TOPIC = "store_elastic";
+const CONTACTS_TOPIC = "update_contacts";
+const ANSWER_TOPIC = "answer_topic"
+
+console.log(RemoteStatus.getInstace().updateStatus(new Risposta("QueryService", false, null)));
+console.log(RemoteStatus.getInstace().getStatus());
+
+
+// const client = connect(CONFIG.mqtt, { clean: false, clientId: CONFIG.name, keepalive: 5 });
+// client.subscribe(CONFIG.STATUS_TOPIC)
+EventRemote.getInstance().client.subscribe(CONFIG.STATUS_TOPIC)
 
 
 app.post(
   "/toParse/", (req, res, next) => {
     ParserRemote.getInstance().toparse(req.body).then((ris: Risposta) => {
-      console.log("Correctly redirected to ParseServer")
+      console.log("Parsing method has been called")
       res.json(ris);
     }).catch((err) => {
-      res.json(new Risposta("Errore query Edge", false, err));
+      let response = new Risposta("Error /toParse/", false, err);
+      // console.log(JSON.stringify(response));
+      EventRemote.getInstance().sendError(response);
+      res.json(response);
+    });
+  });
+
+app.post(
+  "/upload/", (req, res, next) => {
+    ParserRemote.getInstance().toparse(req.body).then((ris: Risposta) => {
+      console.log("Upload method has been called")
+      if (ris.esito) {
+
+        ElasticRemote.getInstance().addNewMetadata(ris.valore.elasticExport).then((ris2: Risposta) => {
+
+          if (ris2.esito) {
+            EventRemote.getInstance().client.publish(TOPIC, JSON.stringify(ris.valore.mongoExport));
+            EventRemote.getInstance().client.publish(CONTACTS_TOPIC, JSON.stringify(ris.valore.contacts));
+          } else {
+            let response = new Risposta("Error /upload/ -> ElastiRemote", false, [ris, ris2]);
+            EventRemote.getInstance().sendWarning(response, response.esito);
+            console.log("->" + JSON.stringify(ris2));
+          }
+          res.json(ris2);
+        }).catch((err) => {
+          let response = new Risposta("Error /upload/ -> ElastiRemote", false, err);
+          // console.log(JSON.stringify(response));
+          EventRemote.getInstance().sendError(response);
+          res.json(response);
+          console.log("-----------------------------------------------------------------");
+        });
+
+      } else {
+        let response = new Risposta("Error /upload/ -> ParserRemote fail", false, ris);
+        // console.log(JSON.stringify(response));
+        EventRemote.getInstance().sendError(response);
+        res.json(response);
+      }
+
+    }).catch((err) => {
+      let response = new Risposta("Error /upload/ -> ParserRemote catch", false, err);
+      // console.log(JSON.stringify(response));
+      EventRemote.getInstance().sendError(response);
+      res.json(response);
     });
   });
 
 
+
 app.post(
   "/saveMetadata/", (req, res, next) => {
-    console.log("-----------------------------------------------------------------");
-    console.log(JSON.stringify(req.body.elasticExport));
-    console.log("-----------------------------------------------------------------");
+
+
     ElasticRemote.getInstance().addNewMetadata(req.body.elasticExport).then((ris: Risposta) => {
-      console.log("-Correctly redirected to Elastic Server")
-      console.log("->" + JSON.stringify(ris));
+
       if (ris.esito) {
-        MongoRemote.getInstance().addNewMetadata(req.body.mongoExport).then((ris: Risposta) => {
-          console.log("Correctly redirected to Mongo Server")
-          MongoRemote.getInstance().addContact(req.body.contacts).then((ris: Risposta) => {
-            console.log("Correctly redirected to Mongo Server Contact")
-            res.json(ris);
-          }).catch((err) => {
-            res.json(new Risposta("Errore query Mongo Contact", false, err));
-          });
-        }).catch((err) => {
-          res.json(new Risposta("Errore query Mongo", false, err));
-        });
+        // console.log("-> OK");
+        EventRemote.getInstance().client.publish(TOPIC, JSON.stringify(req.body.mongoExport));
+        EventRemote.getInstance().client.publish(CONTACTS_TOPIC, JSON.stringify(req.body.contacts));
+        let response = new Risposta("Ok saveMetadata/", true, null);
       } else {
-        res.json(ris);
+        let response = new Risposta("Error saveMetadata/", false, ris);
+        console.log(JSON.stringify(response));
+        EventRemote.getInstance().sendError(response);
+        res.json(response);
       }
+
     }).catch((err) => {
-      res.json(new Risposta("Errore query Edge", false, err));
+      let response = new Risposta("Error saveMetadata/ catch", false, err);
+      // console.log(JSON.stringify(response));
+      EventRemote.getInstance().sendError(response);
+      res.json(response);
+      console.log("-----------------------------------------------------------------");
     });
   });
 
@@ -58,12 +115,15 @@ app.get("/getAllContacts", (req, res) => {
       console.log("--------------------------------------");
       res.json(risposta);
     }).catch((err) => {
-      res.json(new Risposta("Errore 2 ", false, err));
+      let response = new Risposta("Error getAllContacts", false, err);
+      // console.log(JSON.stringify(response));
+      EventRemote.getInstance().sendError(response);
+      res.json(response);
     })
 
 });
 
-app.get("/countAll",async (req, res) => {
+app.get("/countAll", async (req, res) => {
   await MongoRemote.getInstance()
     .countAll()
     .then((risposta: Risposta) => {
@@ -72,36 +132,18 @@ app.get("/countAll",async (req, res) => {
       console.log("--------------------------------------");
       res.json(risposta);
     }).catch((err) => {
-      res.json(new Risposta("Errore 2 ", false, err));
-    })
+      let response = new Risposta("Error countAll", false, err);
+      // console.log(JSON.stringify(response));
+      EventRemote.getInstance().sendError(response);
+      res.json(response);
+    });
 
 });
 
-app.get("/test",async (req, res) => {
+app.get("/test", async (req, res) => {
 
-  let risposte: Risposta[] = [];
-  await MongoRemote.getInstance().getVersion().then((ris1: Risposta) => {
-    risposte.push(ris1);
-  }).catch((err) => {
-    new Risposta("MongoDbService is down", false, new Date());
-  })
-  await ParserRemote.getInstance().getVersion().then((ris2: Risposta) => {
-    risposte.push(ris2);
-  }).catch((err) => {
-    new Risposta("ParserService is down", false, new Date());
-  })
-  await QueryRemote.getInstance().getVersion().then((ris3: Risposta) => {
-    risposte.push(ris3);
-  }).catch((err) => {
-    new Risposta("QueryService is down", false, new Date());
-  })
-  await ElasticRemote.getInstance().getVersion().then((ris4: Risposta) => {
-    risposte.push(ris4);
-  }).catch((err) => {
-    new Risposta("QueryService is down", false, new Date());
-  })
-  risposte.push(new Risposta("EdgeServer - v0.09b - 14-02-2020", true, new Date()));
-  res.json(risposte);
+  res.json(RemoteStatus.getInstace().getStatus());
+
 });
 
 
@@ -112,15 +154,18 @@ app.get(
     console.log("--- GET ALL UGBD METADATA REQUEST USING ELASTIC---");
     QueryRemote.getInstance()
       .getAll()
-      .then((risposta : Risposta)  => {
+      .then((risposta: Risposta) => {
         res.json(risposta);
       }).catch((err) => {
-        res.json(new Risposta("Errore 3 ", false, err));
+        let response = new Risposta("Error getAll_E", false, err);
+        // console.log(JSON.stringify(response));
+        EventRemote.getInstance().sendError(response);
+        res.json(response);
       });
   }
 );
 
- 
+
 app.post(
   "/getQuery_Response", (req, res, next) => {
     console.log("--- GET ALL UGBD METADATA REQUEST USING ELASTIC GEO CAPABILITIES---");
@@ -129,12 +174,17 @@ app.post(
     console.log("-------------------------------------------------------------------")
     QueryRemote.getInstance()
       .getQueryResponse(req.body)
-      .then((risposta : Risposta)  => {
+      .then((risposta: Risposta) => {
         console.log("--------------------------------------");
         console.log(risposta);
         console.log("--------------------------------------");
         res.json(risposta);
-      });
+      }).catch((err) => {
+        let response = new Risposta("Error getQuery_Response", false, err);
+        // console.log(JSON.stringify(response));
+        EventRemote.getInstance().sendError(response);
+        res.json(response);
+      })
   }
 );
 
@@ -146,8 +196,11 @@ app.get(
       .findMetadataByID(req.params.metadataId)
       .then((risposta: Risposta) => {
         res.json(risposta);
-      }).catch (()=> {
-        res.json(new Risposta("Error2 getAll", false, null));
+      }).catch((err) => {
+        let response = new Risposta("Error /getByID/" + req.params.metadataId, false, err);
+        // console.log(JSON.stringify(response));
+        EventRemote.getInstance().sendError(response);
+        res.json(response);
       });
   }
 );
@@ -159,21 +212,35 @@ app.get(
     MongoRemote.getInstance()
       .findMetadataByID(req.params.metadataId)
       .then((risposta: Risposta) => {
-        res.set({"Content-Disposition":"attachment; filename=metadata.xml "});
+        res.set({ "Content-Disposition": "attachment; filename=metadata.xml " });
         res.send(risposta.valore.rndt_xml);
-        // res.setHeader('Content-disposition', 'attachment; filename=metadata.xml');
-        // res.setHeader('Content-type', 'text/xml');
-        // res.charset = 'UTF-8';
-        // res.write(risposta.valore);
-        // res.end();
-      }).catch (()=> {
-        res.json(new Risposta("Error2 getAll", false, null));
+      }).catch((err) => {
+        let response = new Risposta("Error /DownloadMetadata/" + req.params.metadataId, false, err);
+        // console.log(JSON.stringify(response));
+        EventRemote.getInstance().sendError(response);
+        res.json(response);
       });
   }
 );
 
+EventRemote.getInstance().client.on("message", (topic, payload) => {
+  try {
+    let risposta: Risposta = Risposta.of(JSON.parse(payload.toString()));
+    console.log("++++++++++++++++++++++++++++++++++++++++++++++++++");
+    console.log(JSON.stringify(risposta));
+    console.log("++++++++++++++++++++++++++++++++++++++++++++++++++");
+    RemoteStatus.getInstace().updateStatus(risposta);
+  } catch (err) {
+    let response = new Risposta("Mqtt error", false, err);
+    // console.log(JSON.stringify(response));
+    EventRemote.getInstance().sendError(response);
+  }
+})
 
-
-app.listen(PORT, () => {
-  console.log("Express server listening on port p1d " + PORT);
+app.listen(CONFIG.port, () => {
+  // EventRemote.getInstance().sendLog("Express server listening on port p1d " + CONFIG.port);
+  console.log("Express server listening on port p1d " + CONFIG.port);
+  EventRemote.getInstance().sendLog("EdgeServer listening on port :" + CONFIG.port);
 });
+
+

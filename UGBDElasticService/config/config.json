@@ -1,0 +1,10 @@
+{
+    "name" : "ElasticService",
+    "frequency" :  300000,
+    "STATUS_TOPIC" :  "status_component",
+    "LOG_TOPIC" :  "log_topic",
+    "port": 3710,
+    "version" : "0.1.7",
+    "mqtt" : "mqtt://172.17.0.1:1883"
+    
+}

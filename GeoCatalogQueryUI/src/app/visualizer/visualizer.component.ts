@@ -1,9 +1,9 @@
-import {  Component,  OnInit,  ViewChild,  ElementRef,  Inject} from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { Location } from '@angular/common';
-import { Observable } from "rxjs";
-import { Http } from "@angular/http";
-import { map } from "rxjs/operators";
-import { tileLayer, circle, polygon, latLng } from "leaflet";
+import { Observable } from 'rxjs';
+import { Http } from '@angular/http';
+import { map } from 'rxjs/operators';
+import { tileLayer, circle, polygon, latLng } from 'leaflet';
 import * as L from 'leaflet';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Transaltor } from '../models/Translator';
@@ -22,23 +22,25 @@ export interface ViewData {
 
 
 @Component({
-  selector: "app-visualizer",
-  templateUrl: "./visualizer.component.html",
-  styleUrls: ["./visualizer.component.css"]
+  selector: 'app-visualizer',
+  templateUrl: './visualizer.component.html',
+  styleUrls: ['./visualizer.component.css']
 })
 export class VisualizerComponent implements OnInit {
 
 
-  private static readonly POSITIONALACCURACY: string = "positionalAccuracy";
+  private static readonly POSITIONALACCURACY: string = 'positionalAccuracy';
 
   filename: string;
   obj: object;
   coordinate: any;
+  
   counter: number = 0;
   sub: any;
   sub_t: any;
   translator: Transaltor;
   myMatCard: MyMatCard;
+  // tslint:disable-next-line: variable-name
   to_confirm: boolean;
   to_export: any;
   dialogRef: any;
@@ -58,13 +60,13 @@ export class VisualizerComponent implements OnInit {
 
 
   }
-  @ViewChild("one") d1: ElementRef;
+  @ViewChild('one') d1: ElementRef;
 
   ngOnInit() {
 
     let userLang = navigator.language;
 
-    console.log("--------------------------------------------------------")
+    console.log('--------------------------------------------------------')
     console.log(userLang)
     console.log('--------------------------------------------------------')
     // Prev method from file.
@@ -78,12 +80,12 @@ export class VisualizerComponent implements OnInit {
             // Defaults to 0 if no query param provided.
             // console.log("------ VisualizerComponent---------------------------------")
             // console.log(JSON.parse(params['query']));
-            if (params["to_confirm"]) {
+            if (params['to_confirm']) {
 
 
-              console.log("-----------------------------------------------------");
-              console.log("---TO_CONFIRM IS TRUE");
-              console.log("-----------------------------------------------------");
+              console.log('-----------------------------------------------------');
+              console.log('---TO_CONFIRM IS TRUE');
+              console.log('-----------------------------------------------------');
 
               this.obj = this.dataServiceService.dataFromParser.elasticExport.rndt_json;
 
@@ -116,7 +118,7 @@ export class VisualizerComponent implements OnInit {
 
   download() {
 
-    window.open(ParserService.DOWNLOAD_METADATA + this.metadata_id, "_blank");
+    window.open(ParserService.DOWNLOAD_METADATA + this.metadata_id, '_blank');
   }
 
 
@@ -135,19 +137,19 @@ export class VisualizerComponent implements OnInit {
   public getTansaltion(): Observable<any> {
     // Reads file from assets
     return this.http
-      .get("assets/Transaltion.json")
+      .get('assets/Transaltion.json')
       .pipe(map((res: any) => res.json())); // <-- if u want to user
 
   }
 
   upload() {
-    console.log("---------------------------------------------------------------");
-    console.log("-----RISPOSTA");
-    console.log("---------------------------------------------------------------");
+    console.log('---------------------------------------------------------------');
+    console.log('-----RISPOSTA');
+    console.log('---------------------------------------------------------------');
 
     this.dialogRef = this.dialog.open(ViewDialog, {
       width: '250px',
-      data: { filename: "questo" }
+      data: { filename: 'questo' }
     });
 
     this.parser.save(this.dataServiceService.dataFromParser).then((ris: Risposta) => {
@@ -155,12 +157,12 @@ export class VisualizerComponent implements OnInit {
       this.dialogRef.close();
       this._router.navigate(['/up']);
 
-      this._snackBar.open("Ok! Metadata successfully uploaded!", "", {
+      this._snackBar.open('Ok! Metadata successfully uploaded!', '', {
         duration: 2000,
       });
     }).catch((err) => {
       this.dialogRef.close();
-      this._snackBar.open("ATTENTION ERROR UPLOADING METADATA!!! ", "", {
+      this._snackBar.open('ATTENTION ERROR UPLOADING METADATA!!! ', '', {
         duration: 2000,
       });
       console.log(JSON.stringify(err));
@@ -199,11 +201,11 @@ export class VisualizerComponent implements OnInit {
   }
 
   public appendKeyValue(value: any, key: string) {
-    if (key !== "location") {
-      if (key == "dataQualityInfo") {
+    if (key !== 'location') {
+      if (key == 'dataQualityInfo') {
 
         this.d1.nativeElement.insertAdjacentHTML(
-          "beforeend",
+          'beforeend',
           this.myMatCard.getMatCart(5 * this.counter, key, this.appendValueQuality(value))
 
         );
@@ -211,7 +213,8 @@ export class VisualizerComponent implements OnInit {
 
       } else {
         this.d1.nativeElement.insertAdjacentHTML(
-          "beforeend",
+           
+          'beforeend',
 
           this.myMatCard.getMatCart(5 * this.counter, key, this.appendValue(value))
 
@@ -223,19 +226,19 @@ export class VisualizerComponent implements OnInit {
   public appendValue(value: any): string {
 
 
-    if (typeof value === "string" || typeof value === "number") {
+    if (typeof value === 'string' || typeof value === 'number') {
       // console.log("-NOT  ok-");
 
-      return value + "";
+      return value + '';
     } else {
       this.counter = this.counter + 1;
       // console.log("-ok-");
-      let exit = "";
+      let exit = '';
 
       for (let key in value) {
 
         // console.log("-> " + key)
-        if (key == "geographicElement") {
+        if (key == 'geographicElement') {
 
 
           this.coordinate = value[key];
@@ -244,7 +247,7 @@ export class VisualizerComponent implements OnInit {
           exit = exit + this.myMatCard.getMatCardEmpty();
 
 
-        } else if (key == "graphicOverview") {
+        } else if (key == 'graphicOverview') {
 
           exit = exit + this.myMatCard.getMatCartIMG(5 * this.counter, key, value[key][0].fileName);
 
@@ -273,7 +276,10 @@ export class VisualizerComponent implements OnInit {
 
             } else {
 
+
               exit = exit + this.myMatCard.getMatCart(5 * this.counter, key, this.appendValue(value[key]));
+
+
 
             }
           }
@@ -287,11 +293,11 @@ export class VisualizerComponent implements OnInit {
 
   public appendValueQuality(value: any): string {
 
-    let exit = "";
-    if (typeof value === "string" || typeof value === "number") {
+    let exit = '';
+    if (typeof value === 'string' || typeof value === 'number') {
 
       // console.log("CI ENTRO : " + value)
-      return value + "";
+      return value + '';
 
     } else {
       // this.counter = this.counter + 1;
@@ -300,12 +306,12 @@ export class VisualizerComponent implements OnInit {
         // tslint:disable-next-line:quotemark
         console.log("-> " + key)
         this.counter = this.counter + 1;
-        if ((key == "value") || (key == "result") || (key == "report")) {
+        if ((key == 'value') || (key == 'result') || (key == 'report')) {
           this.counter = this.counter - 1;
           exit = exit + this.appendValueQuality(value[key]);
         } else {
 
-          if (key !== "Real") {
+          if (key !== 'Real') {
 
 
             exit = exit + this.myMatCard.getMatCart(5 * this.counter, key, this.appendValueQuality(value[key]));
@@ -332,12 +338,30 @@ export class VisualizerComponent implements OnInit {
 
   }
 
+  syntaxHighlight(json) {
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+      var cls = 'number';
+      if (/^"/.test(match)) {
+        if (/:$/.test(match)) {
+          cls = 'key';
+        } else {
+          cls = 'string';
+        }
+      } else if (/true|false/.test(match)) {
+        cls = 'boolean';
+      } else if (/null/.test(match)) {
+        cls = 'null';
+      }
+      return '<span class="' + cls + '">' + match + '</span>';
+    });
+  }
 
   validURL(str) {
     try {
       new URL(str);
 
-      if (str.includes("mailto")) {
+      if (str.includes('mailto')) {
         return false;
       } else {
         return true;
@@ -350,13 +374,14 @@ export class VisualizerComponent implements OnInit {
 
   urlshort(str: string) {
     if (str.length > 30) {
-      return str.substring(0, 29) + "[..]";
+      return str.substring(0, 29) + '[..]';
     } else {
       return str;
     }
   }
 
 }
+
 
 
 @Component({

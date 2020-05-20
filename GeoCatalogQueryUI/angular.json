@@ -134,5 +134,8 @@
       }
     }
   },
-  "defaultProject": "ogcVisualizer"
+  "defaultProject": "ogcVisualizer",
+  "cli": {
+    "analytics": "5a076768-221e-4612-93f8-b34618354c30"
+  }
 }

@@ -1,0 +1,14 @@
+{
+    "name" : "LogService",
+    "frequency" :  300000,
+    "test" : true,
+    "STATUS_TOPIC" :  "status_component",
+    "mqtt" : "mqtt://172.17.0.1:1883",
+    "LOG_TOPIC" :  "log_topic",
+    "port": 3905,
+    "version" : "0.1.7",
+    "db" : "mongodb://172.17.0.1:27017/UGBDLog",
+    "ERROR_WARNING_TABLE" : "ErrorLogs",
+    "LOG_TABLE" : "NormalLogs"
+    
+}

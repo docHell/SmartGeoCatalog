@@ -7,8 +7,8 @@ import { existsSync } from 'fs';
 import { EQuery } from '../models/ElasticQuery';
 export class ElasticJobs {
   private static _instance: ElasticJobs;
-  private static readonly ADDRESS: string = "http://10.0.1.95:9200/";
-  // private static readonly ADDRESS: string = "http://127.0.0.1:9200/";
+  // private static readonly ADDRESS: string = "http://10.0.1.95:9200/";
+  private static readonly ADDRESS: string = "http://172.17.0.1:9200/";
   public static readonly CHILDREN: string = "children";
   public static readonly GEOGRAPHICELEMENT: string = "geographicElement";
   private static client: Client;

@@ -1,13 +1,12 @@
+import { EventRemote } from './../providers/EventRemote';
 import { ElasticJobs } from './../providers/ElasticJobs';
-  
-
+ 
 import app from "./app";
 import { Risposta } from '../models/Risposta';
-import { EQuery } from '../models/ElasticQuery';
-import { Product_Db } from '../models/Product';
-
-const PORT = 3700;
-
+import { EQuery } from '../models/ElasticQuery'; 
+import CONFIG from '../config/config.json';
+ 
+EventRemote.getInstance().client.subscribe(CONFIG.STATUS_TOPIC);
 
 app.get(
   "/getAll_E", (req, res, next) => {
@@ -19,7 +18,12 @@ app.get(
         // console.log(JSON.stringify(risposta));
         // console.log("--------------------------------------");
         res.json(risposta);
-      });
+      }).catch( (err) => {
+        let response = new Risposta("Error /getAll_E", false, err);
+        // console.log(JSON.stringify(response));
+        EventRemote.getInstance().sendError(response);
+        res.json(response);
+      })
   }
 );
 
@@ -33,7 +37,12 @@ app.get(
         // console.log(JSON.stringify(risposta));
         // console.log("--------------------------------------");
         res.json(risposta);
-      });
+      }).catch( (err) => {
+        let response = new Risposta("Error /getAll_E_GeoProva", false, err);
+        // console.log(JSON.stringify(response));
+        EventRemote.getInstance().sendError(response);
+        res.json(response);
+      })
   }
 );
 app.post(
@@ -49,19 +58,33 @@ app.post(
         // console.log(JSON.stringify(risposta));
         // console.log("--------------------------------------");
         res.json(risposta);
-      });
+      }).catch( (err) => {
+        let response = new Risposta("Error /getQuery_Response", false, err);
+        // console.log(JSON.stringify(response));
+        EventRemote.getInstance().sendError(response);
+        res.json(response);
+      })
   }
 );
 
 
 app.get("/test", (req, res) => {
-  res.json(new Risposta("QueryService - v0.05a - 28-01-2020", true, new Date()));
+  res.json(new Risposta("QueryService", true, new Date()));
+  status();
 });
 
-app.listen(PORT, () => {
-  console.log("Express server listening on port p1d " + PORT);
+app.listen(CONFIG.port, () => {
+  EventRemote.getInstance().sendLog("QueryService listening on port :" + CONFIG.port);
+  console.log("Express server listening on port p1d " + CONFIG.port);
+  status();
 });
 
+function status() {
+  let payload = JSON.stringify(new Risposta(CONFIG.name, true,  CONFIG.version));
+  EventRemote.getInstance().client.publish(CONFIG.STATUS_TOPIC, payload);
+}
+
+setInterval(status, CONFIG.frequency);
 
 
 //// PROVA 

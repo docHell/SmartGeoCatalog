@@ -1,6 +1,6 @@
-import * as express from "express";
-import * as bodyParser from "body-parser";
-import * as mongoose from "mongoose";
+import express from "express";
+import  bodyParser from "body-parser";
+
 var cors = require('cors');
 
 class App {

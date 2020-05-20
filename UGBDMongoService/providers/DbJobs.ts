@@ -1,10 +1,10 @@
-import * as mongoose from "mongoose";
-import * as autoIncrement from "mongoose-auto-increment"
-import * as Bluebird from "bluebird";
+import  mongoose from "mongoose";
+import autoIncrement from "mongoose-auto-increment"
+import Bluebird from "bluebird";
 import { Risposta } from "../models/Risposta";
 import { Observable } from "rxjs";
 import { Subject } from "rxjs";
-import * as basicAuth from "basic-auth";
+import basicAuth from "basic-auth";
 
 import { Metadata_schema, Metadata, MetadataExport, Metadata_Db } from '../models/Metadatas';
 import { Contacts, Contact_schema, Contact_Db } from '../models/Contacts';
@@ -21,8 +21,8 @@ export class DbJobs {
     (<any>mongoose).Promise = Bluebird;
 
 
-    let connection = mongoose.createConnection("mongodb://127.0.0.1:27017/RNDTProva");
-    mongoose.connect("mongodb://127.0.0.1:27017/RNDTProva");
+    let connection = mongoose.createConnection("mongodb://172.17.0.1:27017/RNDTProva");
+    mongoose.connect("mongodb://172.17.0.1:27017/RNDTProva");
 
 
     this.metadataInTheDb = mongoose.model("Metadatas", Metadata_schema);
@@ -36,7 +36,7 @@ export class DbJobs {
 
     await this.metadataInTheDb.find({ _id: metadata._id }).then(async (result: Metadata_Db[]) => {
       console.log("----List of Metadata with the same id---")
-      console.log(result)
+      console.log(result.length)
       console.log("----------------------------------------")
       if (result.length > 0) {
         console.log("-> There is a Metadata with the same id");
@@ -58,13 +58,13 @@ export class DbJobs {
 
         }).catch((err: String) => {
           console.log("-> ERROR Metadata NOT Saved");
-          exit = new Risposta("Error 2 Insert Document", false, null);
+          exit = new Risposta("Error 2 Insert Document", false, err);
         });
 
       }
     });
 
-    console.log("-> : ", JSON.stringify(exit));
+    // console.log("-> : ", JSON.stringify(exit));
     return exit;
   }
 
@@ -79,7 +79,7 @@ export class DbJobs {
           return article_id === contacts.document_id;
         }
 
-        console.log("->" + JSON.stringify(result))
+        // console.log("->" + JSON.stringify(result))
         if (result.length > 0) {
           let contactInDb: Contact_Db = result[0];
           if (contactInDb.articles) {

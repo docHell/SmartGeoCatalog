@@ -10,9 +10,9 @@ import { Risposta } from 'src/app/models/Risposta';
 export class ParserService {
 
 
-  public static URL: string = 'https://www.fhffcapp.it/edge/';
+  // public static URL: string = 'https://www.fhffcapp.it/edge/';
   // public static URL: string = 'https://www.lucafrigerio.com/edge/';
-  // public static URL: string = 'http://localhost:3800/';
+  public static URL: string = 'http://localhost:3800/';
   private PARSER_TO = ParserService.URL + 'toParse/';
   private SAVE_METADATA_TO = ParserService.URL + 'saveMetadata/';
   private COUNT_ALL = ParserService.URL + 'countAll/';

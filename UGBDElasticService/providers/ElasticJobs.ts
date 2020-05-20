@@ -6,19 +6,19 @@ import { Risposta } from "../models/Risposta";
 import { ElasticExport } from "../models/ElasticExport";
 import { Query } from '../models/Query';
 import { existsSync } from 'fs';
-
-import * as basicAuth from "basic-auth";
+import { Subject, Observable } from "rxjs";
+import basicAuth from "basic-auth";
 
 export class ElasticJobs {
   private static _instance: ElasticJobs;
-  private static readonly ADDRESS: string = "http://10.0.1.95:9200/";
-  // private static readonly ADDRESS: string = "http://127.0.0.1:9200/";
+  // private static readonly ADDRESS: string = "http://10.0.1.95:9200/";
+  private static readonly ADDRESS: string = "http://127.0.0.1:9200/";
   public static readonly CHILDREN: string = "children";
   public static readonly GEOGRAPHICELEMENT: string = "geographicElement";
   private static client: Client;
   private static log = console.log.bind(console);
 
-  private static readonly INDEX : string = "test_finale1";
+  private static readonly INDEX: string = "test_finale1";
 
   private constructor() {
     ElasticJobs._instance = this;
@@ -28,48 +28,46 @@ export class ElasticJobs {
       node: [ElasticJobs.ADDRESS]
     });
   }
-  
-  public ping()  {
-    
+
+  public ping() {
+
     ElasticJobs.client.ping(
-     
+
       (error) => {
         if (error) {
           console.error("elasticsearch cluster is down!");
-          
+
         } else {
           console.log("TUTTO OK");
         }
       }
     );
-    
+
   }
- 
 
 
-  public async uploadDocument(e : ElasticExport) : Promise<Risposta> {
-    console.log("********************************************")
-    console.log("UPLOAD DOCUMENT")
-    let exit : Risposta;
+
+  public async uploadDocument(e: ElasticExport): Promise<Risposta> {
+    // console.log("********************************************")
+    // console.log("UPLOAD DOCUMENT")
+    let exit: Risposta;
     let uuid = e._id;
-    let doc  = e.rndt_json;
+    let doc = e.rndt_json;
 
-    const doc2: RequestParams.Index = 
-      {
-        index: ElasticJobs.INDEX,
-        type: "singoli",
-        id: uuid,
-        body: JSON.stringify(doc)
-      };
+    const doc2: RequestParams.Index =
+    {
+      index: ElasticJobs.INDEX,
+      type: "singoli",
+      id: uuid,
+      body: JSON.stringify(doc)
+    };
 
-      await ElasticJobs.client.index(doc2).then(() => {
-        exit = new Risposta("Uploaded Document : " +  e._id, true,null)
-      }).catch((err) => {
-        exit = new Risposta("ERRPR Uploaded Document : " +  e._id, false, err);
-        console.log("Error upload ");
-        console.log(JSON.stringify(err));
-      })
-      console.log("********************************************")
+    await ElasticJobs.client.index(doc2).then(() => {
+      exit = new Risposta("Uploaded Document : " + e._id, true, null)
+    }).catch((err) => {
+      exit = new Risposta("ERROR Uploaded Document : " + e._id, false, err);
+    })
+    // console.log("********************************************")
 
     return exit;
   }
@@ -115,11 +113,32 @@ export class ElasticJobs {
     return this._instance;
   }
 
+
+  public  checkIndex() : Observable<Risposta> {
+    let exit: Subject<Risposta> = new Subject<Risposta>();
+    ElasticJobs.client.cat.indices({ "format": "json" }, (err, res) => {
+      console.log("->" + JSON.stringify(res));
+      console.log("->" + err);
+      if (err) {
+        // console.log("->qui");
+        exit.next(new Risposta("ERROR",false,err));
+        // exit = new Risposta("ERROR",false,err);
+      } else {
+        // console.log("->quo");
+        // exit = new Risposta("OK",true,res.body);
+        exit.next(new Risposta("OK",true,res.body));
+        // console.log(JSON.stringify(exit));
+      }
+      
+    })
+    return exit.asObservable();
+  }
+
   public async createIndex(): Promise<Risposta> {
-    let exit : Risposta;
+    let exit: Risposta;
     await ElasticJobs.client.indices.create(
       {
-        index: ElasticJobs.INDEX ,
+        index: ElasticJobs.INDEX,
         body: {
 
           mappings: {
@@ -476,7 +495,7 @@ export class ElasticJobs {
                       properties: {
                         statement: {
                           type: "text",
-                          copy_to: ["ugbd_full_search","ugbd_lineage"]
+                          copy_to: ["ugbd_full_search", "ugbd_lineage"]
                         }
                       }
                     },
@@ -490,16 +509,16 @@ export class ElasticJobs {
                               type: "nested",
                               properties: {
                                 Real: {
-                                  type: "float" ,
+                                  type: "float",
                                   copy_to: "ugbd_accuracy"
                                 }
                               }
                             }
                           }
-                        }    
+                        }
                       }
                     }
-                  } 
+                  }
                 },
                 location: {
                   type: "geo_shape"
@@ -509,9 +528,9 @@ export class ElasticJobs {
           }
           //   }
         }
-      }).then ( (res) => {
+      }).then((res) => {
         exit = new Risposta("Index Created ", true, res)
-      }).catch( (err) => {
+      }).catch((err) => {
         exit = new Risposta("Error Creating Index ", false, err)
       })
     console.log("-----------")

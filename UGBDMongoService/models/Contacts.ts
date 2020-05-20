@@ -23,6 +23,14 @@ export class Contact {
 
   constructor() {
   }
+
+  public static of( c : any) : Contact {
+    let exit : Contact = new Contact();
+    exit._id = c._id;
+    exit.mail = c.mail;
+    exit.organization = c.organization;
+    return exit;
+  }
 }
 export class Contacts {
 
@@ -32,5 +40,15 @@ export class Contacts {
   constructor(document_id: string, contacts: Contact[]) {
     this.document_id = document_id;
     this.contacts = contacts;
+  }
+
+  public static of( c : any) : Contacts {
+    let cs : Contact[] = [];
+    let _cs : any[] = c.contacts as any[];
+    _cs.forEach((element : any) => {
+      cs.push(Contact.of(element));
+    })
+
+    return new Contacts(c.document_id,cs);
   }
 }

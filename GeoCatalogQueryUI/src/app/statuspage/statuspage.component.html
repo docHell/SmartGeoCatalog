@@ -32,14 +32,14 @@
 </mat-card>
 <div class="row">
   <div class="column_a">
-    <mat-card
-    *ngFor="let risposta of risposte"
-    class="example-card mat-elevation-z6 separatore"
-  >
-    <mat-card-content>
-      <p class="testo">Server : <b>{{ risposta.status }}</b></p>
-      <p>Last time online : {{ risposta.data | date:'medium' }}</p>
+    <mat-card     *ngFor="let risposta of risposte"     class="example-card mat-elevation-z6 separatore" >
+    <mat-card-content  >
+      <p [hidden]="!risposta.esito"class="testo">Server : <b>{{ risposta.status }} v.{{ risposta.valore }}</b></p>
+      <p [hidden]="!risposta.esito">Last time online : {{ risposta.data | date:'medium' }}</p>
+      <p [hidden]="risposta.esito" class="testo">Server : <b>{{ risposta.status }} NOT ONLINE</b></p>
+      <p [hidden]="risposta.esito" >Contact your system manager</p>
     </mat-card-content>
+     
   </mat-card>
   </div>
   <div class="column_b">

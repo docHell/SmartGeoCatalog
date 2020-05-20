@@ -1,0 +1,11 @@
+{
+    "name" : "MongoDbService",
+    "frequency" :  300000,
+    "test" : true,
+    "LOG_TOPIC" :  "log_topic",
+    "port": 3705,
+    "version" : "0.1.7",
+    "STATUS_TOPIC" :  "status_component",
+    "mqtt" : "mqtt://172.17.0.1:1883"
+    
+}
